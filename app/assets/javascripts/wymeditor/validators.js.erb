@@ -716,15 +716,16 @@ WYMeditor.XhtmlValidator = {
   },
   isValidTag: function(tag)
   {
-    if(this._tags[tag]){
-      return true;
-    }
-    for(var key in this._tags){
-      if(this._tags[key] == tag){
-        return true;
-      }
-    }
-    return false;
+    return true;
+    // if(this._tags[tag]){
+    //   return true;
+    // }
+    // for(var key in this._tags){
+    //   if(this._tags[key] == tag){
+    //     return true;
+    //   }
+    // }
+    // return false;
   },
   getDefaultAttributesAndEventsForTag: function(tag)
   {
