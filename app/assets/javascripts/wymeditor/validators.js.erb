@@ -640,8 +640,8 @@ WYMeditor.XhtmlValidator = {
     "54":"time",
     "55":"canvas",
     "56":"audio",
-    // "57":"video",
-    // "58":"source",
+    "57":"video",
+    "58":"source",
     "59":"output",
     "60":"progress",
     "61":"ruby",
@@ -716,16 +716,16 @@ WYMeditor.XhtmlValidator = {
   },
   isValidTag: function(tag)
   {
-    //return true;
-    if(this._tags[tag]){
-      return true;
-    }
-    for(var key in this._tags){
-      if(this._tags[key] == tag){
-        return true;
-      }
-    }
-    return false;
+    return true;
+    // if(this._tags[tag]){
+    //   return true;
+    // }
+    // for(var key in this._tags){
+    //   if(this._tags[key] == tag){
+    //     return true;
+    //   }
+    // }
+    // return false;
   },
   getDefaultAttributesAndEventsForTag: function(tag)
   {
@@ -758,13 +758,13 @@ WYMeditor.XhtmlValidator = {
   validateAttribute: function(tag, attribute, value)
   {
     return true;
-    if ( this._tags[tag] &&
-      (this._tags[tag]['attributes'] && this._tags[tag]['attributes'][attribute] && value.length > 0 && !value.match(this._tags[tag]['attributes'][attribute])) || // invalid format
-      (this._tags[tag] && this._tags[tag]['required'] && WYMeditor.Helper.contains(this._tags[tag]['required'], attribute) && value.length == 0) // required attribute
-    ) {
-      return false;
-    }
-    return typeof this._tags[tag] != 'undefined';
+    // if ( this._tags[tag] &&
+    //   (this._tags[tag]['attributes'] && this._tags[tag]['attributes'][attribute] && value.length > 0 && !value.match(this._tags[tag]['attributes'][attribute])) || // invalid format
+    //   (this._tags[tag] && this._tags[tag]['required'] && WYMeditor.Helper.contains(this._tags[tag]['required'], attribute) && value.length == 0) // required attribute
+    // ) {
+    //   return false;
+    // }
+    // return typeof this._tags[tag] != 'undefined';
   },
   getPossibleTagAttributes: function(tag)
   {
