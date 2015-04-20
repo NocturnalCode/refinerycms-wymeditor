@@ -640,15 +640,28 @@ WYMeditor.XhtmlValidator = {
     "54":"time",
     "55":"canvas",
     "56":"audio",
-    "57":"video",
-    "58":"source",
-    "59":"output",
-    "60":"progress",
-    "61":"ruby",
-    "62":"rt",
-    "63":"rp",
-    "64":"summary",
-    "65":"command"<% Refinery::Wymeditor.whitelist_tags.each do |key, value| %>,
+    "video" : {
+      "attributes" : {
+        "0":"width",
+        "1":"height",
+        "2":"poster",
+        "3":"controls",
+        "4":"autoplay"
+      }
+    },
+    "source" : {
+      "attributes" : {
+        "0":"src",
+        "1":"type"
+      }
+    }
+    "57":"output",
+    "58":"progress",
+    "59":"ruby",
+    "60":"rt",
+    "61":"rp",
+    "62":"summary",
+    "63":"command"<% Refinery::Wymeditor.whitelist_tags.each do |key, value| %>,
     <%= key.inspect %>:<%= value.to_json %><% end %>
   },
 
@@ -716,16 +729,15 @@ WYMeditor.XhtmlValidator = {
   },
   isValidTag: function(tag)
   {
-    return true;
-    // if(this._tags[tag]){
-    //   return true;
-    // }
-    // for(var key in this._tags){
-    //   if(this._tags[key] == tag){
-    //     return true;
-    //   }
-    // }
-    // return false;
+    if(this._tags[tag]){
+      return true;
+    }
+    for(var key in this._tags){
+      if(this._tags[key] == tag){
+        return true;
+      }
+    }
+    return false;
   },
   getDefaultAttributesAndEventsForTag: function(tag)
   {
@@ -757,14 +769,13 @@ WYMeditor.XhtmlValidator = {
   },
   validateAttribute: function(tag, attribute, value)
   {
-    return true;
-    // if ( this._tags[tag] &&
-    //   (this._tags[tag]['attributes'] && this._tags[tag]['attributes'][attribute] && value.length > 0 && !value.match(this._tags[tag]['attributes'][attribute])) || // invalid format
-    //   (this._tags[tag] && this._tags[tag]['required'] && WYMeditor.Helper.contains(this._tags[tag]['required'], attribute) && value.length == 0) // required attribute
-    // ) {
-    //   return false;
-    // }
-    // return typeof this._tags[tag] != 'undefined';
+    if ( this._tags[tag] &&
+      (this._tags[tag]['attributes'] && this._tags[tag]['attributes'][attribute] && value.length > 0 && !value.match(this._tags[tag]['attributes'][attribute])) || // invalid format
+      (this._tags[tag] && this._tags[tag]['required'] && WYMeditor.Helper.contains(this._tags[tag]['required'], attribute) && value.length == 0) // required attribute
+    ) {
+      return false;
+    }
+    return typeof this._tags[tag] != 'undefined';
   },
   getPossibleTagAttributes: function(tag)
   {
